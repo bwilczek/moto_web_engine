@@ -1,0 +1,22 @@
+<% 
+run.cnt_all
+
+passed_percent = run.cnt_passed.to_f * 100 / run.cnt_all
+failure_percent = run.cnt_failure.to_f * 100 / run.cnt_all
+error_percent = run.cnt_error.to_f * 100 / run.cnt_all
+skipped_percent = run.cnt_skipped.to_f * 100 / run.cnt_all
+
+tooltip = "Total: #{run.cnt_all}\n"
+tooltip << "Passed: #{run.cnt_passed} (#{passed_percent.round(2)}%)\n"
+tooltip << "Failure: #{run.cnt_failure} (#{failure_percent.round(2)}%)\n"
+tooltip << "Error: #{run.cnt_error} (#{error_percent.round(2)}%)\n"
+tooltip << "Skipped: #{run.cnt_skipped} (#{skipped_percent.round(2)}%)"
+
+%>
+
+<div title="<%= tooltip %>">
+<div style="float: left; display: inline-block; height: 14px; width: <%= passed_percent.round %>px; background-color: #00ff00;"></div>
+<div style="float: left; display: inline-block; height: 14px; width: <%= failure_percent.round %>px; background-color: #ff0000;"></div>
+<div style="float: left; display: inline-block; height: 14px; width: <%= error_percent.round %>px; background-color: #00ffff;"></div>
+<div style="float: left; display: inline-block; height: 14px; width: <%= skipped_percent.round %>px; background-color: #666666;"></div>
+</div>

@@ -18,6 +18,9 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.2.4"
-
+  s.add_dependency 'jquery-rails', '~> 3.0.0'
+  s.add_dependency 'jquery-ui-rails', '~> 5.0.0'
+  s.add_dependency 'kaminari'
+  
   s.add_development_dependency 'mysql2', '~> 0.3.18'
 end

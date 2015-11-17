@@ -1,2 +1,26 @@
-Fancy table with the results will come here. Results in raw format are:
-<%= @runs.to_s %>
+<table class="results">
+	<thead>
+		<th>Name</th>
+		<th>Result</th>
+		<th>User</th>
+		<th>Host</th>
+		<th>Stats</th>
+	</thead>
+	<tbody>		
+<%
+  i = 0 
+  @runs.each do |r| 
+    i += 1
+%>
+	<tr class="<%= i.odd? ? 'odd' : 'even' %>">
+		<td><%= link_to r.name, r %></td>
+		<td><%= r.result.upcase %></td>
+		<td><%= r.user %></td>
+		<td><%= r.host %></td>
+		<td style="padding: 0px;"><%= render partial: 'stats_bar', locals: { run: r } %></td>
+	</tr>
+<% end %>
+	</tbody>
+</table>
+<br />
+<%= paginate @runs %>

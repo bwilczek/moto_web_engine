@@ -1,0 +1,24 @@
+<%= @run.name %>
+
+<table class="results">
+	<thead>
+		<th>Name</th>
+		<th>Result</th>
+		<th>Duration</th>
+		<th>Log</th>
+	</thead>
+	<tbody>		
+<%
+  i = 0 
+  @run.tests.each do |t| 
+    i += 1
+%>
+	<tr class="<%= i.odd? ? 'odd' : 'even' %>">
+		<td><%= t.name %></td>
+		<td><%= t.result.upcase %></td>
+		<td><%= t.duration %></td>
+		<td>log</td>
+	</tr>
+<% end %>
+	</tbody>
+</table>
