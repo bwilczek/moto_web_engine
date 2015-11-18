@@ -1,5 +1,6 @@
 <% 
-run.cnt_all
+
+return if run.result.to_sym.eql? :running
 
 passed_percent = run.cnt_passed.to_f * 100 / run.cnt_all
 failure_percent = run.cnt_failure.to_f * 100 / run.cnt_all
@@ -15,8 +16,8 @@ tooltip << "Skipped: #{run.cnt_skipped} (#{skipped_percent.round(2)}%)"
 %>
 
 <div title="<%= tooltip %>">
-<div style="float: left; display: inline-block; height: 14px; width: <%= passed_percent.round %>px; background-color: #00ff00;"></div>
-<div style="float: left; display: inline-block; height: 14px; width: <%= failure_percent.round %>px; background-color: #ff0000;"></div>
-<div style="float: left; display: inline-block; height: 14px; width: <%= error_percent.round %>px; background-color: #00ffff;"></div>
-<div style="float: left; display: inline-block; height: 14px; width: <%= skipped_percent.round %>px; background-color: #666666;"></div>
+<div style="float: left; display: inline-block; height: 14px; width: <%= passed_percent.round %>px; background-color: <%= bgcolor_result(:passed) %>;"></div>
+<div style="float: left; display: inline-block; height: 14px; width: <%= failure_percent.round %>px; background-color: <%= bgcolor_result(:failure) %>;"></div>
+<div style="float: left; display: inline-block; height: 14px; width: <%= error_percent.round %>px; background-color: <%= bgcolor_result(:error) %>;"></div>
+<div style="float: left; display: inline-block; height: 14px; width: <%= skipped_percent.round %>px; background-color: <%= bgcolor_result(:skipped) %>;"></div>
 </div>

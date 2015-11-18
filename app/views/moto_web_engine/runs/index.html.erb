@@ -4,6 +4,8 @@
 		<th>Result</th>
 		<th>User</th>
 		<th>Host</th>
+		<th>Started at</th>
+		<th>Duration</th>
 		<th>Stats</th>
 	</thead>
 	<tbody>		
@@ -14,9 +16,11 @@
 %>
 	<tr class="<%= i.odd? ? 'odd' : 'even' %>">
 		<td><%= link_to r.name, r %></td>
-		<td><%= r.result.upcase %></td>
+		<td style="background-color: <%= bgcolor_result(r.result) %>"><%= r.result.upcase %></td>
 		<td><%= r.user %></td>
 		<td><%= r.host %></td>
+		<td><%= r.created_at %></td>
+		<td><%= duration r.duration %></td>
 		<td style="padding: 0px;"><%= render partial: 'stats_bar', locals: { run: r } %></td>
 	</tr>
 <% end %>

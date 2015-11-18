@@ -1,11 +1,70 @@
-<%= @run.name %>
+<%
+
+if @run.result.to_sym.eql? :running
+  passed_percent = ''
+  failure_percent = ''
+  error_percent = ''
+  skipped_percent = ''
+else
+  passed_percent = "(#{(@run.cnt_passed.to_f * 100 / @run.cnt_all).round(2)}%)"
+  failure_percent = "(#{(@run.cnt_failure.to_f * 100 / @run.cnt_all).round(2)}%)"
+  error_percent = "(#{(@run.cnt_error.to_f * 100 / @run.cnt_all).round(2)}%)"
+  skipped_percent = "(#{(@run.cnt_skipped.to_f * 100 / @run.cnt_all).round(2)}%)"
+end
+%>
+
+<div class="test_header"><%= @run.name %></div>
+<br />
+<table class="top_summary">
+	<tr>
+		<th>Result:</th>
+		<td style="background-color: <%= bgcolor_result(@run.result) %>"><%= @run.result.upcase %></td>
+	</tr>
+	<tr>
+		<th>Started at:</th>
+		<td><%= @run.created_at %></td>
+	</tr>
+	<tr>
+		<th>User:</th>
+		<td><%= @run.user %></td>
+	</tr>
+	<tr>
+		<th>Host:</th>
+		<td><%= @run.host %></td>
+	</tr>
+	<tr>
+		<th>Duration:</th>
+		<td><%= duration @run.duration %></td>
+	</tr>
+	<tr>
+		<th># all</th>
+		<td><%= @run.cnt_all %></td>
+	</tr>
+	<tr>
+		<th># passed</th>
+		<td><%= @run.cnt_passed %> <%= passed_percent %></td>
+	</tr>
+	<tr>
+		<th># failure</th>
+		<td><%= @run.cnt_failure %> <%= failure_percent %></td>
+	</tr>
+	<tr>
+		<th># error</th>
+		<td><%= @run.cnt_error %> <%= error_percent %></td>
+	</tr>
+	<tr>
+		<th># skipped</th>
+		<td><%= @run.cnt_skipped %> <%= skipped_percent %></td>
+	</tr>
+</table>
+
+<br />
 
 <table class="results">
 	<thead>
-		<th>Name</th>
+		<th>Test name</th>
 		<th>Result</th>
 		<th>Duration</th>
-		<th>Log</th>
 	</thead>
 	<tbody>		
 <%
@@ -14,10 +73,9 @@
     i += 1
 %>
 	<tr class="<%= i.odd? ? 'odd' : 'even' %>">
-		<td><%= t.name %></td>
-		<td><%= t.result.upcase %></td>
-		<td><%= t.duration %></td>
-		<td>log</td>
+		<td><%= link_to(t.name, t, onclick: "javascript:(function(ele) { window.open(ele.href, ele.title,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=850,height=600,top=50,left=50')})(this); return false;") %></td>
+		<td style="background-color: <%= bgcolor_result(t.result) %>"><%= t.result.upcase %></td>
+		<td><%= duration t.duration %></td>
 	</tr>
 <% end %>
 	</tbody>

@@ -20,6 +20,10 @@ body {
   font-size: 12px;
 }
 
+table.results td {
+  padding: 3px;
+}
+
 table.results tr.odd {
   background-color: #eeeeee;
 }
@@ -34,4 +38,22 @@ table.results tr.even {
 
 table.results tr.even:hover {
   background-color: #cccccc;
+}
+
+div.code {
+  font-family: courier, monospace
+}
+
+span.log_error {
+  font-weight: bolder;
+  color: #ff0000;
+}
+
+div.test_header {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+table.top_summary th {
+  text-align: left;
 }

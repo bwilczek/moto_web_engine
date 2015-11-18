@@ -1,0 +1,37 @@
+<div class="test_header"><%= @test.name %></div>
+<br />
+<table class="top_summary">
+	<tr>
+		<th>Result:</th>
+		<td style="background-color: <%= bgcolor_result(@test.result) %>"><%= @test.result.upcase %></td>
+	</tr>
+	<tr>
+		<th>Started at:</th>
+		<td><%= @test.created_at %></td>
+	</tr>
+	<tr>
+		<th>Duration:</th>
+		<td><%= duration @test.duration %></td>
+	</tr>
+<% unless @test.env.eql?('__default') %>	
+	<tr>
+		<th>Environment:</th>
+		<td><%= @test.env %></td>
+	</tr>
+<% end %>	
+<% unless @test.parameters.eql?('{}') %>	
+	<tr>
+		<th>Parameters:</th>
+		<td><%= @test.parameters %></td>
+	</tr>
+<% end %>	
+</table>
+
+<hr />
+<div class="code">
+<% if @test.log.nil? %>
+Wait until test execution is finished to see the log.
+<% else %>
+<%= @test.log.gsub("\n", '<br />').gsub('] ERROR --', '] <span class="log_error">ERROR</span> --').html_safe %>
+<% end %>	
+</div>
