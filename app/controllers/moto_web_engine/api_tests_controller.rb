@@ -23,7 +23,6 @@ module MotoWebEngine
     def update
       test = Test.find params[:id]
       input = JSON.parse(request.body.read)
-      puts input
       # validate input hash here (or delegate to some private method)
       test.update input
       render json: test
